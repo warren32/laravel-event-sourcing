@@ -2,6 +2,7 @@
 
 namespace Spatie\EventSourcing\StoredEvents;
 
+use Carbon\CarbonImmutable;
 use Spatie\EventSourcing\StoredEvents\Repositories\StoredEventRepository;
 
 class EventSubscriber
@@ -33,6 +34,7 @@ class EventSubscriber
 
     public function storeEvent(ShouldBeStored $event): void
     {
+        $event->setCreatedAt(CarbonImmutable::now());
         $storedEvent = $this->repository->persist($event);
         $storedEvent->handle();
     }

@@ -3,6 +3,7 @@
 namespace Spatie\EventSourcing\Tests\Models;
 
 use Carbon\Carbon;
+use Carbon\CarbonImmutable;
 use Illuminate\Support\Str;
 use Spatie\EventSourcing\Enums\MetaData;
 use Spatie\EventSourcing\EventSerializers\EventSerializer;
@@ -206,9 +207,9 @@ class StoredEventTest extends TestCase
     /** @test */
     public function created_at_is_set_on_event()
     {
-        $now = Carbon::make('2021-01-01 10:00:00');
+        $now = CarbonImmutable::make('2021-01-01 10:00:00');
 
-        Carbon::setTestNow($now);
+        CarbonImmutable::setTestNow($now);
 
         $this->fireEvents();
 
